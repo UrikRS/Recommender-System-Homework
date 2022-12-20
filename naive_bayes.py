@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from load_data import load_all
 from sklearn.model_selection import train_test_split, cross_val_score
@@ -15,9 +16,9 @@ def map_attributes(data):
 
 
 rating, users, movies = load_all("Recommender System/")
-rating_user = pd.merge(rating, users, on="user_id")
-rating_user = map_attributes(rating_user)
-data = pd.merge(rating_user, movies, on="item_id").fillna(0)
+data = pd.merge(rating, users, on="user_id")
+data = map_attributes(data)
+data = pd.merge(data, movies, on="item_id").fillna(0)
 
 features = ["age", "gender", "occupation","release_date", "unknown", "Action", "Adventure", "Animation","Children's", "Comedy", "Crime",
          "Documentary", "Drama", "Fantasy", "Film-Noir", "Horror", "Musical", "Mystery", "Romance", "Sci-Fi", "Thriller", "War", "Western"]
@@ -28,3 +29,4 @@ nb.fit(x_train, y_train.to_numpy().ravel())
 
 cvs = cross_val_score(nb, data[features].fillna(0), data[["rating"]].to_numpy().ravel(), cv=5)
 print(cvs)
+print('mean :', np.mean(cvs))
