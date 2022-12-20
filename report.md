@@ -109,7 +109,7 @@ k = [2, 4, 8]
 
 使用 u1～u5 的資料集進行 5 次 RMSE 輸出，計算其平均值。
 
-已知若使用所有預測值皆爲 0 的 model，其 5 次的 RMSE 輸出將會落在 3.6, 3.7 左右，相較之下 Item Base CF 的誤差值有顯著的減少。
+已知若使用所有預測值皆爲 0 的 model，其 5 次的 RMSE 輸出將會落在 3.6, 3.7 左右，相較之下 Item Base CF 的誤差值有顯著的減少，但整體而言誤差還是偏大。
 
 ```
 ----------2-neighbors----------
@@ -133,4 +133,53 @@ u3.test RMSE : 2.425303738135374
 u4.test RMSE : 2.4748264591987574
 u5.test RMSE : 2.575107201472646
 mean : 2.5316303788349366
+```
+
+### Naive Bayes Model
+
+實作方法：
+
+1. 將 u.data, u.user, u.item 組合成一個大資料，且將非數字的轉換成數字。
+2. 將整組資料分成 80% : 20% 的 train, test 資料集。
+3. 使用 sklearn 中的 naive bayes model。
+4. 使用 sklearn 的 cross_val_score 輸出模型的 5-fold 準確度。
+
+輸出結果：
+
+準確率約只有 32% ，有可能模型的使用方法有誤，也有可能是 naive base model 不適合使用在較大資料量的訓練集，或者資料有更有效的處理方式，整體而言缺乏有效找出問題的手段。
+
+```
+[0.32985 0.31595 0.3319  0.32715 0.32575]
+mean : 0.32611999999999997
+```
+
+### Decision Tree Model
+
+實作方法：
+
+1. 將 u.data, u.user, u.item 組合成一個大資料，且將非數字的轉換成數字。
+2. 將整組資料分成 80% : 20% 的 train, test 資料集。
+3. 使用 sklearn 的 ParameterGrid 設定所有想要測試的 parameters。
+4. 利用 sklearn Pipeline 製作經過 StandardScaler, PCA 的 DecisionTreeClassifier model。
+5. 廻圈找出 ParameterGrid 中的最佳解。
+6. 使用 sklearn 的 cross_val_score 輸出最佳模型的 5-fold 準確度。
+
+輸出結果：
+
+```
+pgrid = ParameterGrid({
+    'criterion': ['entropy', 'gini'], 
+    'splitter': ['best', 'random'], 
+    'max_depth': [5, 7, 10], 
+    'min_samples_leaf': [1, 3, 5], 
+    'min_samples_split': [2, 3, 4], 
+    'max_features': [7, 8, 9], 
+    'random_state': [123]
+    })
+```
+
+```
+best parameter : {'criterion': 'gini', 'max_depth': 7, 'max_features': 9, 'min_samples_leaf': 5, 'min_samples_split': 2, 'random_state': 123, 'splitter': 'best'}
+[0.3124  0.2968  0.30645 0.3272  0.32495]
+mean : 0.31356
 ```
