@@ -48,11 +48,14 @@ class Item_Base_CF:
 
 if __name__ == '__main__':
     n_neighbors = [2, 4, 8]
-    for n in n_neighbors:
-        print('-'*10+str(n)+'-neighbors'+'-'*10)
+    for k in n_neighbors:
+        print('-'*10+str(k)+'-neighbors'+'-'*10)
+        r = []
         # 5-fold
         for i in range(1, 6):
             train, test = load_train_test("Recommender System/", i)
-            cf = Item_Base_CF(n)
+            cf = Item_Base_CF(k)
             cf.fit(train)
-            print('u'+str(i)+'.test RMSE :', cf.RMSE(test))
+            r.append(cf.RMSE(test))
+            print('u'+str(i)+'.test RMSE :', r[-1])
+        print('mean :', np.mean(r))
