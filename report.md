@@ -1,9 +1,5 @@
 # Recommender System Project – Movielens100k
 
-610521224 陳皓妤
-
-410721249 陳俊仁
-
 ## Data discription
 
 - 根據 ml-100k 中 readme.md 的描述：
