@@ -37,7 +37,7 @@ class Item_Base_CF:
             pred_r = product_sum / (np.sum(sim)+epsilon)
         return pred_r
 
-    def RMSE(self, data):
+    def rmse(self, data):
         # Function to calculate RMSE of predicted rating & actual rating
         x = data[["item_id", "user_id"]].to_numpy()
         y = data[["rating"]].to_numpy()
@@ -56,6 +56,6 @@ if __name__ == '__main__':
             train, test = load_train_test("Recommender System/", i)
             cf = Item_Base_CF(k)
             cf.fit(train)
-            r.append(cf.RMSE(test))
+            r.append(cf.rmse(test))
             print('u'+str(i)+'.test RMSE :', r[-1])
         print('mean :', np.mean(r))

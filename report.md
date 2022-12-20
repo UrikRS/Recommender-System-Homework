@@ -94,7 +94,7 @@ class Item_Base_CF:
             pred_r = product_sum / (np.sum(sim)+epsilon)
         return pred_r
 
-    def RMSE(self, data):
+    def rmse(self, data):
         # Function to calculate RMSE of predicted rating & actual rating
         x = data[["item_id", "user_id"]].to_numpy()
         y = data[["rating"]].to_numpy()

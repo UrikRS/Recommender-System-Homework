@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-from sklearn.tree import DecisionTreeRegressor
+from sklearn.tree import DecisionTreeClassifier
 
 def map_attributes(data):
     gender_map = {'M':0, 'F':1}
@@ -26,8 +26,9 @@ features = ["age", "gender", "occupation","release_date", "unknown", "Action", "
          "Documentary", "Drama", "Fantasy", "Film-Noir", "Horror", "Musical", "Mystery", "Romance", "Sci-Fi", "Thriller", "War", "Western"]
 
 x_train, x_test, y_train, y_test = train_test_split(data[features], data[["rating"]], test_size=0.2, random_state=1)
-dt = Pipeline([('ss', StandardScaler()), ('pca', PCA(n_components=5)), ('dt', DecisionTreeRegressor())])
+
+dt = Pipeline([('ss', StandardScaler()), ('pca', PCA(n_components=5)), ('dt', DecisionTreeClassifier())])
 dt.fit(x_train, y_train.to_numpy().ravel())
 
-cvs = cross_val_score(dt, data[features].fillna(0), data[["rating"]].to_numpy().ravel(), cv=5)
+cvs = cross_val_score(dt, data[features], data[["rating"]].to_numpy().ravel(), cv=5)
 print(cvs)
