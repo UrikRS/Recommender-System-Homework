@@ -33,6 +33,8 @@
     Children's | Comedy | Crime | Documentary | Drama | Fantasy |
     Film-Noir | Horror | Musical | Mystery | Romance | Sci-Fi |
     Thriller | War | Western
+    
+    
 
     其中 release date ( modified to release year ) 的分佈爲：
 
@@ -182,4 +184,22 @@ pgrid = ParameterGrid({
 best parameter : {'criterion': 'gini', 'max_depth': 7, 'max_features': 9, 'min_samples_leaf': 5, 'min_samples_split': 2, 'random_state': 123, 'splitter': 'best'}
 [0.3124  0.2968  0.30645 0.3272  0.32495]
 mean : 0.31356
+```
+
+## KMeans & SVM
+實作方法：
+
+1. 將 u.genre 只取電影類別部分。
+2. 使用 sklearn 的 KMeans（K = 50） ，將電影分成k個類別
+3. 使用 ub.base 及 ub.test 做 train 及 test
+4. 使用 sklearn 的 SVM 測試結果， 計算準確度
+5. 將 ub.base 及 ub.test 的 'item ID'修改成KMeans 分類後的類別
+6. 使用 sklearn 的 SVM 測試結果， 計算準確度
+
+輸出結果：
+準確度只有35%，推測是以電影ID為特征訓練，資料太分散，訓練成果不高
+```
+0.3570519618239661
+
+0.3570519618239661
 ```
