@@ -16,15 +16,15 @@
 
     其中 age 的分佈爲：
 
-    ![01](user_age.png)
+    ![01](./Pic/user_age.png)
 
     gender 的分佈爲：
 
-    ![02](user_gender.png)
+    ![02](./Pic/user_gender.png)
 
     occupation 的分佈爲：
 
-    ![03](user_occupation.png)
+    ![03](./Pic/user_occupation.png)
 
 - u.item 中有 24 個 columns：
 
@@ -38,11 +38,11 @@
 
     其中 release date ( modified to release year ) 的分佈爲：
 
-    ![04](movies_release_year.png)
+    ![04](./Pic/movies_release_year.png)
 
     各個 genre 的分佈爲：
 
-    ![05](movies_genre.png)
+    ![05](./Pic/movies_genre.png)
 
 ## Program discription
 

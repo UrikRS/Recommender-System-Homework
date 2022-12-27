@@ -15,7 +15,7 @@ users.age.plot.hist(bins=25)
 plt.title("User's Ages Distribution")
 plt.ylabel("Number of Users")
 plt.xlabel("Age")
-plt.savefig("Recommender System/Homework/user_age.png")
+plt.savefig("Recommender System/Homework/Pic/user_age.png")
 plt.close()
 
 # Make user occupation distribution plot
@@ -23,7 +23,7 @@ occupation_count = users[["user_id", "occupation"]].groupby("occupation", as_ind
 plt.pie(occupation_count["size"], labels=occupation_count["occupation"])
 plt.title("User's Occupation Distribution")
 plt.axis("equal")
-plt.savefig("Recommender System/Homework/user_occupation.png")
+plt.savefig("Recommender System/Homework/Pic/user_occupation.png")
 plt.close()
 
 # Make user gender percentage plot
@@ -31,7 +31,7 @@ gender_count = users[["user_id", "gender"]].groupby("gender", as_index=False).si
 plt.pie(gender_count["size"], labels=gender_count["gender"], autopct='%1.0f%%')
 plt.title("User's Gender Distribution")
 plt.axis("equal")
-plt.savefig("Recommender System/Homework/user_gender.png")
+plt.savefig("Recommender System/Homework/Pic/user_gender.png")
 plt.close()
 
 # Make item release year distribution plot
@@ -39,7 +39,7 @@ movies[["release_date"]].groupby("release_date").size().plot(kind='area')
 plt.title("Movie's Release Year Distribution")
 plt.ylabel("Number of Movies")
 plt.xlabel("Release Year")
-plt.savefig("Recommender System/Homework/movies_release_year.png")
+plt.savefig("Recommender System/Homework/Pic/movies_release_year.png")
 plt.close()
 
 # Make item genre distribution plot
@@ -55,5 +55,5 @@ genre_count = pd.DataFrame({"genre":["unknown", "Action", "Adventure", "Animatio
 plt.pie(genre_count["count"], labels=genre_count["genre"])
 plt.title("Movie's Genre Distribution")
 plt.axis("equal")
-plt.savefig("Recommender System/Homework/movies_genre.png")
+plt.savefig("Recommender System/Homework/Pic/movies_genre.png")
 plt.close()
